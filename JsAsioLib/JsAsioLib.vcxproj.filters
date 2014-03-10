@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="JsAsioServerLib">
+      <UniqueIdentifier>{5b84fb9e-abe4-4f3c-aecd-822d7deaf797}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="JsAsioServerLib\Packet">
+      <UniqueIdentifier>{42422561-3f61-410b-8770-c84beec7867a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="JsAsioServerLib\Log">
+      <UniqueIdentifier>{e7a2dd9b-675e-458a-aa1d-9d86e2007e49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="JsAsioServerLib\Util">
+      <UniqueIdentifier>{7904b2e8-e5d3-48a9-bc73-475eee0d5b83}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="JsAsioServer.h">
+      <Filter>JsAsioServerLib</Filter>
+    </ClInclude>
+    <ClInclude Include="JsAsioThreadPool.h">
+      <Filter>JsAsioServerLib</Filter>
+    </ClInclude>
+    <ClInclude Include="JsAsioBoost_h.h">
+      <Filter>JsAsioServerLib</Filter>
+    </ClInclude>
+    <ClInclude Include="JsAsioAccept.h">
+      <Filter>JsAsioServerLib</Filter>
+    </ClInclude>
+    <ClInclude Include="JsAsioSessionGroup.h">
+      <Filter>JsAsioServerLib</Filter>
+    </ClInclude>
+    <ClInclude Include="JsAsioSession.h">
+      <Filter>JsAsioServerLib</Filter>
+    </ClInclude>
+    <ClInclude Include="JsAsioSessionBase.h">
+      <Filter>JsAsioServerLib</Filter>
+    </ClInclude>
+    <ClInclude Include="JsAsioPacketFactory.h">
+      <Filter>JsAsioServerLib\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="log4z.h">
+      <Filter>JsAsioServerLib\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="JsAsioPacketBase.h">
+      <Filter>JsAsioServerLib\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="JsAsioPacketHead.h">
+      <Filter>JsAsioServerLib\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="JsAsioPacketTime.h">
+      <Filter>JsAsioServerLib\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="SafeDeque.hpp">
+      <Filter>JsAsioServerLib\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="JsAsioPacketFile.h">
+      <Filter>JsAsioServerLib\Packet</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="JsAsioLib.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="JsAsioServer.cpp">
+      <Filter>JsAsioServerLib</Filter>
+    </ClCompile>
+    <ClCompile Include="JsAsioThreadPool.cpp">
+      <Filter>JsAsioServerLib</Filter>
+    </ClCompile>
+    <ClCompile Include="JsAsioAccept.cpp">
+      <Filter>JsAsioServerLib</Filter>
+    </ClCompile>
+    <ClCompile Include="JsAsioSessionGroup.cpp">
+      <Filter>JsAsioServerLib</Filter>
+    </ClCompile>
+    <ClCompile Include="JsAsioSession.cpp">
+      <Filter>JsAsioServerLib</Filter>
+    </ClCompile>
+    <ClCompile Include="JsAsioSessionBase.cpp">
+      <Filter>JsAsioServerLib</Filter>
+    </ClCompile>
+    <ClCompile Include="JsAsioPacketFactory.cpp">
+      <Filter>JsAsioServerLib\Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="log4z.cpp">
+      <Filter>JsAsioServerLib\Log</Filter>
+    </ClCompile>
+    <ClCompile Include="JsAsioPacketBase.cpp">
+      <Filter>JsAsioServerLib\Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="JsAsioPacketHead.cpp">
+      <Filter>JsAsioServerLib\Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="JsAsioPacketTime.cpp">
+      <Filter>JsAsioServerLib\Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="JsAsioPacketFile.cpp">
+      <Filter>JsAsioServerLib\Packet</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
