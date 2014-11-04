@@ -42,7 +42,7 @@ std::vector<CJsAsioPacketBase*> CJsAsioPacketTime::WriteParse()
 	_haed->SetType(CJsAsioPacketBase::CLASSTYPE_AsioPacketTime);
 	_haed->SetBoadySize( _time->GetPacketSize() ); 
 
-	strcpy_s(_time->buffer, 256 * sizeof(char),  "send 0000³â");
+	strcpy_s(_time->GetPacketData(), _time->GetPacketSize(),  "send 0000³â");
 
 	temp.push_back(_haed);
 	temp.push_back(_time);

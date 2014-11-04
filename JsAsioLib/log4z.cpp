@@ -1131,8 +1131,5 @@ ILog4zManager * ILog4zManager::GetInstance()
 	return &m;
 }
 
-
-
 _ZSUMMER_LOG4Z_END
 _ZSUMMER_END
-
