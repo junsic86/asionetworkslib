@@ -186,15 +186,29 @@ void client4()
 }
 
 
-WMIHelp wmi;
+
 int _tmain(int argc, _TCHAR* argv[])
 {
-
+	WMIHelp wmi;
 	while(1)
 	{
-		wmi.ShowNetWorks();
+		int nRecv, nSend;
+		wmi.GetNetWorkTrafficPerSec(nRecv, nSend);
+
+		std::cout<<"SendByte : "<<nSend<<std::endl;
+		std::cout<<"RecvByte : "<<nRecv<<std::endl;
+		
+		wmi.GetNetWorkTrafficPerSecTotal(nRecv, nSend);
+		
+		std::cout<<"SendByteTotal : "<<nSend<<std::endl;
+		std::cout<<"RecvByteTotal : "<<nRecv<<std::endl;
+
+		int nCpu;
+		wmi.GetCpuUserPercent(nCpu);
+		std::cout<<"CPU : "<<nCpu<<std::endl;
+
 		Sleep(1000);
-		system("cls");
+		//system("cls");
 	}
 
 	return -1;

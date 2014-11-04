@@ -122,16 +122,178 @@ int WMIHelp::InitWmi()
 
 }
 
-int WMIHelp::ShowNetWorks(void)
+int WMIHelp::GetNetWorkTrafficPerSec(int &nByteSend, int&nByteRecv)
 {
+	nByteSend = 0;
+	nByteRecv = 0;
+
 	// Step 6: --------------------------------------------------
 	// Use the IWbemServices pointer to make requests of WMI ----
 
 	// For example, get the name of the operating system
 	IEnumWbemClassObject* pEnumerator = NULL;
+	
+	hres = pSvc->ExecQuery(
+		bstr_t("WQL"), 
+		bstr_t("SELECT * FROM Win32_PerfFormattedData_Tcpip_NetworkInterface"),
+		WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY, 
+		NULL,
+		&pEnumerator);
+
+	/*
 	hres = pSvc->ExecQuery(
 		bstr_t("WQL"), 
 		bstr_t("SELECT * FROM Win32_PerfRawData_Tcpip_NetworkInterface"),
+		WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY, 
+		NULL,
+		&pEnumerator);
+	*/
+
+	if (FAILED(hres))
+	{
+		cout << "Query for operating system name failed."
+			<< " Error code = 0x" 
+			<< hex << hres << endl;
+		pSvc->Release();
+		pLoc->Release();
+		CoUninitialize();
+		return 1;               // Program has failed.
+	}
+
+	// Step 7: -------------------------------------------------
+	// Get the data from the query in step 6 -------------------
+
+	IWbemClassObject *pclsObj = NULL;
+	ULONG uReturn = 0;
+
+	while (pEnumerator)
+	{
+		HRESULT hr = pEnumerator->Next(WBEM_INFINITE, 1, 
+			&pclsObj, &uReturn);
+
+		if(0 == uReturn)
+		{
+			break;
+		}
+
+		VARIANT vtProp;
+
+		// Get the value of the Name property
+		hr = pclsObj->Get(L"BytesSentPersec", 0, &vtProp, 0, 0);
+		//wcout << " BytesSentPersec : " << vtProp.bstrVal << endl;
+		int tempSend = _wtoi(vtProp.bstrVal);
+
+		hr = pclsObj->Get(L"BytesReceivedPersec", 0, &vtProp, 0, 0);
+		//wcout << " BytesReceivedPersec : " << vtProp.bstrVal << endl;
+		int tempRecv = _wtoi(vtProp.bstrVal);
+		
+		if(tempRecv > nByteRecv)
+			nByteRecv = tempRecv;
+
+		if(tempSend > nByteSend)
+			nByteSend = tempSend;
+
+		VariantClear(&vtProp);
+
+		pclsObj->Release();
+	}
+
+	//clean
+	pEnumerator->Release();
+	if(!pclsObj) pclsObj->Release();
+
+
+	return 0;   // Program successfully completed.
+}
+
+int WMIHelp::GetNetWorkTrafficPerSecTotal(int &nByteSend, int&nByteRecv)
+{
+	nByteSend = 0;
+	nByteRecv = 0;
+
+	// Step 6: --------------------------------------------------
+	// Use the IWbemServices pointer to make requests of WMI ----
+
+	// For example, get the name of the operating system
+	IEnumWbemClassObject* pEnumerator = NULL;
+	
+	hres = pSvc->ExecQuery(
+		bstr_t("WQL"), 
+		bstr_t("SELECT * FROM Win32_PerfRawData_Tcpip_NetworkInterface"),
+		WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY, 
+		NULL,
+		&pEnumerator);
+	
+	if (FAILED(hres))
+	{
+		cout << "Query for operating system name failed."
+			<< " Error code = 0x" 
+			<< hex << hres << endl;
+		pSvc->Release();
+		pLoc->Release();
+		CoUninitialize();
+		return 1;               // Program has failed.
+	}
+
+	// Step 7: -------------------------------------------------
+	// Get the data from the query in step 6 -------------------
+
+	IWbemClassObject *pclsObj = NULL;
+	ULONG uReturn = 0;
+
+	while (pEnumerator)
+	{
+		HRESULT hr = pEnumerator->Next(WBEM_INFINITE, 1, 
+			&pclsObj, &uReturn);
+
+		if(0 == uReturn)
+		{
+			break;
+		}
+
+		VARIANT vtProp;
+
+		// Get the value of the Name property
+		hr = pclsObj->Get(L"BytesSentPersec", 0, &vtProp, 0, 0);
+		//wcout << " BytesSentPersec : " << vtProp.bstrVal << endl;
+		int tempSend = _wtoi(vtProp.bstrVal);
+
+		hr = pclsObj->Get(L"BytesReceivedPersec", 0, &vtProp, 0, 0);
+		//wcout << " BytesReceivedPersec : " << vtProp.bstrVal << endl;
+		int tempRecv = _wtoi(vtProp.bstrVal);
+		
+		if(tempRecv > nByteRecv)
+			nByteRecv = tempRecv;
+
+		if(tempSend > nByteSend)
+			nByteSend = tempSend;
+
+		VariantClear(&vtProp);
+
+		pclsObj->Release();
+	}
+
+	//clean
+	pEnumerator->Release();
+	if(!pclsObj) pclsObj->Release();
+
+
+	return 0;   // Program successfully completed.
+}
+
+int WMIHelp::GetCpuUserPercent(int &nCpuPsecent)
+{
+	nCpuPsecent = 0;
+
+	// Step 6: --------------------------------------------------
+	// Use the IWbemServices pointer to make requests of WMI ----
+
+	// For example, get the name of the operating system
+	IEnumWbemClassObject* pEnumerator = NULL;
+
+	hres = pSvc->ExecQuery(
+		bstr_t("WQL"), 
+		bstr_t("SELECT * FROM Win32_PerfFormattedData_PerfProc_Process WHERE name!='Idle' AND name!='_Total'"),
 		WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY, 
 		NULL,
 		&pEnumerator);
@@ -165,9 +327,19 @@ int WMIHelp::ShowNetWorks(void)
 
 		VARIANT vtProp;
 
+
 		// Get the value of the Name property
-		hr = pclsObj->Get(L"BytesSentPersec", 0, &vtProp, 0, 0);
-		wcout << " BytesSentPersec : " << vtProp.bstrVal << endl;
+		hr = pclsObj->Get(L"name", 0, &vtProp, 0, 0);
+		//wcout << " name : " << vtProp.bstrVal;
+
+		hr = pclsObj->Get(L"PercentProcessorTime", 0, &vtProp, 0, 0);
+		//wcout << " cpu : " << vtProp.bstrVal << endl;
+
+		int tempCpuPercent = _wtoi(vtProp.bstrVal);
+
+
+		nCpuPsecent += tempCpuPercent;
+		
 		VariantClear(&vtProp);
 
 		pclsObj->Release();
@@ -179,7 +351,10 @@ int WMIHelp::ShowNetWorks(void)
 
 
 	return 0;   // Program successfully completed.
+
+
 }
+
 
 WMIHelp::WMIHelp(void)
 {
@@ -206,6 +381,7 @@ WMIHelp::~WMIHelp(void)
 
 	
 }
+
 
 
 

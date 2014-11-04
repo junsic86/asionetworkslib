@@ -16,6 +16,10 @@ public:
 	~WMIHelp(void);
 	int InitCom();
 	int InitWmi();
-	int ShowNetWorks(void);
+
+	int GetNetWorkTrafficPerSec(int &nByteSend, int&nByteRecv);
+	int GetNetWorkTrafficPerSecTotal(int &nByteSend, int&nByteRecv);
+	int GetCpuUserPercent(int &nCpuPsecent);
+
 };
 
